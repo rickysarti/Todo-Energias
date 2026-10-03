@@ -26,7 +26,7 @@ export async function GET() {
 
 ## Categorias Disponibles
 
-${categories.map(cat => `- [${cat}](${siteConfig.url}/noticias?categoria=${slugify(cat)})`).join('\n')}
+${categories.map(cat => `- [${cat}](${siteConfig.url}/categoria/${slugify(cat)})`).join('\n')}
 
 ## Autores
 

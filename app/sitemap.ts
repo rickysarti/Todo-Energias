@@ -3,7 +3,7 @@ import { getPublishedPosts, getUniqueAuthors, getUniqueCategories, slugify } fro
 import { siteConfig } from '@/lib/config'
 
 // Force dynamic to always get fresh data from Supabase
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublishedPosts()
@@ -28,6 +28,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: mostRecentPostDate,
       changeFrequency: 'daily',
       priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/actualidad`,
+      lastModified: mostRecentPostDate,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
+    {
+      url: `${siteConfig.url}/guias`,
+      lastModified: mostRecentPostDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
     {
       url: `${siteConfig.url}/sobre`,
@@ -61,7 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${siteConfig.url}/post/${post.slug}`,
     lastModified: new Date(post.updated_at || post.fecha_publicacion || post.created_at),
     changeFrequency: 'weekly' as const,
-    priority: 0.8,
+    priority: post.source === 'noticia' ? 0.85 : 0.7,
   }))
 
   // Markdown versions of posts for AI crawlers
@@ -89,7 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Category pages
   const categoryPages: MetadataRoute.Sitemap = categories.map((category) => {
-    const categoryPosts = posts.filter(p => p.categoria === category)
+    const categoryPosts = posts.filter(p => slugify(p.categoria) === slugify(category))
     const lastModified = categoryPosts.length > 0
       ? new Date(categoryPosts[0].fecha_publicacion || categoryPosts[0].created_at)
       : new Date()

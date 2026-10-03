@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Fraunces } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { siteConfig } from '@/lib/config'
 import './globals.css'
@@ -9,6 +9,13 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+})
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-serif-display',
+  axes: ['opsz'],
 })
 
 export const metadata: Metadata = {
@@ -81,7 +88,6 @@ export const metadata: Metadata = {
       'application/rss+xml': '/rss.xml',
     },
   },
-    generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
@@ -143,6 +149,10 @@ function JsonLd() {
       name: 'Argentina',
     },
     knowsAbout: [
+      'Petroleo y Gas',
+      'Vaca Muerta',
+      'Almacenamiento en Baterias',
+      'Movilidad Electrica',
       'Energia Solar',
       'Energia Eolica',
       'Energias Renovables',
@@ -191,8 +201,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es-AR" className="bg-background">
+    <html lang="es-AR" className="bg-background" suppressHydrationWarning>
       <head>
+        {/* Aplica el tema guardado antes de pintar para evitar parpadeo */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}`,
+          }}
+        />
         <JsonLd />
         {/* Links para SEO con IA/LLMs */}
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Summary" />
@@ -203,7 +219,7 @@ export default function RootLayout({
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

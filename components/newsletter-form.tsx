@@ -41,22 +41,22 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className="rounded-lg border border-border bg-card p-5">
-      <div className="flex items-center gap-2 mb-3">
-        <Mail className="h-5 w-5 text-primary" />
-        <h3 className="font-semibold text-foreground">Newsletter</h3>
+    <div className="rounded-xl border border-border bg-card p-5">
+      <div className="flex items-center gap-2 mb-2">
+        <Mail className="h-5 w-5 text-accent" />
+        <h3 className="font-serif text-lg font-semibold text-foreground">El resumen energético</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-4">
-        Recibe las ultimas noticias de energia directo en tu correo.
+        Una vez por semana, las noticias de energía que importan en Argentina y el mundo. Gratis.
       </p>
       
       {status === 'success' ? (
         <p className="text-sm text-green-600 dark:text-green-400">
-          Gracias por suscribirte. Pronto recibiras nuestras noticias.
+          ¡Listo! Ya estás suscripto al resumen semanal.
         </p>
       ) : status === 'error' ? (
         <p className="text-sm text-red-600 dark:text-red-400">
-          Error al suscribirte. Por favor intenta nuevamente.
+          No pudimos suscribirte. Probá de nuevo en unos minutos.
         </p>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">

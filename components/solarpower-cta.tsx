@@ -1,27 +1,40 @@
+import { ArrowUpRight, Sun } from 'lucide-react'
 import { siteConfig } from '@/lib/config'
 
 interface SolarPowerCTAProps {
-  variant?: 'calculadora' | 'plan' | 'bateria'
+  variant?: 'calculadora' | 'plan' | 'bateria' | 'pyme' | 'movilidad'
 }
 
 const ctaContent = {
   calculadora: {
-    title: 'Calcula tu ahorro con energia solar',
-    text: 'Si estas pensando en pasarte a la energia solar, podes usar nuestra calculadora gratuita para estimar cuanto ahorrarias en tu factura de luz.',
+    title: 'Calculá tu ahorro con energía solar',
+    text: 'Si estás pensando en pasarte a la energía solar, la calculadora gratuita de SolarPower estima cuánto ahorrarías en tu factura de luz.',
     link: siteConfig.links.calculadora,
     anchor: 'Calcular mi ahorro',
   },
   plan: {
-    title: 'Conoce las opciones de energia solar',
-    text: 'Descubri las diferentes opciones para incorporar energia solar en tu hogar o negocio y empeza a ahorrar desde el primer mes.',
-    link: siteConfig.links.solarpower,
-    anchor: 'Ver opciones',
+    title: 'Generá tu propia energía',
+    text: 'Conocé las opciones para incorporar paneles solares en tu hogar y empezar a ahorrar desde el primer mes.',
+    link: siteConfig.links.planes,
+    anchor: 'Ver planes y precios',
   },
   bateria: {
     title: 'Protegete de los cortes de luz',
-    text: 'Con un sistema de baterias de respaldo podes mantener tu hogar funcionando durante los cortes de energia. Conoce las opciones disponibles.',
-    link: siteConfig.links.solarpower,
-    anchor: 'Explorar soluciones de respaldo',
+    text: 'Con baterías de respaldo podés mantener heladera, luces e internet funcionando durante un corte. Conocé las opciones disponibles.',
+    link: siteConfig.links.productos,
+    anchor: 'Ver kits de respaldo',
+  },
+  pyme: {
+    title: 'Energía solar para tu empresa',
+    text: 'Pymes, comercios y productores pueden bajar costos fijos con autoconsumo solar y acceder a beneficios fiscales del RIMI.',
+    link: siteConfig.links.pyme,
+    anchor: 'Ver soluciones para pymes',
+  },
+  movilidad: {
+    title: 'Cargá tu auto con el sol',
+    text: 'Combinar un auto eléctrico con paneles solares en casa reduce aún más el costo por kilómetro. Calculá cuántos paneles necesitás.',
+    link: siteConfig.links.calculadora,
+    anchor: 'Hacer la cuenta',
   },
 }
 
@@ -29,18 +42,34 @@ export function SolarPowerCTA({ variant = 'calculadora' }: SolarPowerCTAProps) {
   const content = ctaContent[variant]
 
   return (
-    <aside className="my-8 p-5 rounded-lg bg-accent/30 border border-accent/50">
-      <h3 className="font-semibold text-foreground mb-2">{content.title}</h3>
-      <p className="text-sm text-muted-foreground mb-3">{content.text}</p>
+    <aside className="my-10 flex flex-col gap-4 rounded-2xl border border-accent/50 bg-gradient-to-br from-accent/20 via-accent/5 to-transparent p-6 sm:flex-row sm:items-center">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+        <Sun className="h-6 w-6" />
+      </div>
+      <div className="flex-1">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">SolarPower</p>
+        <h3 className="font-serif text-xl font-semibold text-foreground">{content.title}</h3>
+        <p className="mt-1 text-sm text-muted-foreground">{content.text}</p>
+      </div>
       <a
         href={content.link}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+        className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
       >
         {content.anchor}
-        <span className="ml-1" aria-hidden="true">&rarr;</span>
+        <ArrowUpRight className="h-4 w-4" />
       </a>
     </aside>
   )
+}
+
+// Elegir el llamado más relevante según el tema de la nota
+export function ctaVariantFor(categoria: string, tags: string[] = []): SolarPowerCTAProps['variant'] {
+  const text = `${categoria} ${tags.join(' ')}`.toLowerCase()
+  if (/movilidad|auto/.test(text)) return 'movilidad'
+  if (/bater|almacenamiento|corte/.test(text)) return 'bateria'
+  if (/pyme|rimi|agro|industria/.test(text)) return 'pyme'
+  if (/tarifa|solar|subsidio/.test(text)) return 'calculadora'
+  return 'plan'
 }

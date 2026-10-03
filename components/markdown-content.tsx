@@ -2,9 +2,8 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
-import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
-import { slugify } from '@/lib/blog'
+import { slugify, stripLeadingTitle, stripMarkdownToText } from '@/lib/blog'
 
 interface MarkdownContentProps {
   content: string
@@ -23,11 +22,10 @@ export function extractHeadings(markdown: string): TocItem[] {
   const headings: TocItem[] = []
   let match
 
-  while ((match = headingRegex.exec(markdown)) !== null) {
+  while ((match = headingRegex.exec(stripLeadingTitle(markdown))) !== null) {
     const level = match[1].length
-    const text = match[2].trim()
-    const id = slugify(text)
-    headings.push({ id, text, level })
+    const text = stripMarkdownToText(match[2].trim())
+    headings.push({ id: slugify(text), text, level })
   }
 
   return headings
@@ -39,16 +37,26 @@ async function processMarkdown(content: string): Promise<string> {
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSlug)
     .use(rehypeStringify, { allowDangerousHtml: true })
-    .process(content)
+    .process(stripLeadingTitle(content))
 
   let html = String(file)
 
-  // Add external link attributes
+  // Heading ids (mismo algoritmo que extractHeadings para que el índice funcione)
+  html = html.replace(/<h([23])>([\s\S]*?)<\/h\1>/g, (_m, level: string, inner: string) => {
+    const text = inner.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#x27;/g, "'")
+    return `<h${level} id="${slugify(text)}">${inner}</h${level}>`
+  })
+
+  // External links open in a new tab
   html = html.replace(
     /<a href="(https?:\/\/[^"]+)"([^>]*)>/g,
-    '<a href="$1" target="_blank" rel="nofollow noopener"$2>'
+    (_m, href: string, rest: string) => {
+      const isOwn = /^https?:\/\/(www\.)?todoenergias\.com\.ar/.test(href)
+      if (isOwn) return `<a href="${href}"${rest}>`
+      const isPartner = /^https?:\/\/(www\.)?(solarpower|cargadorelectrico|solarpool)\.com\.ar/.test(href)
+      return `<a href="${href}" target="_blank" rel="${isPartner ? 'noopener' : 'nofollow noopener'}"${rest}>`
+    }
   )
 
   return html
@@ -58,7 +66,7 @@ export async function MarkdownContent({ content, className = '' }: MarkdownConte
   const html = await processMarkdown(content)
 
   return (
-    <div 
+    <div
       className={`prose ${className}`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
