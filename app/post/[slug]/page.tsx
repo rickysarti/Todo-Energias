@@ -8,7 +8,7 @@ import { Footer } from '@/components/footer'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { CategoryBadge, SourceBadge } from '@/components/category-badge'
 import { ShareBar } from '@/components/share-bar'
-import { MarkdownContent, extractHeadings } from '@/components/markdown-content'
+import { MarkdownContent, extractHeadings, extractFaq } from '@/components/markdown-content'
 import { RelatedPosts } from '@/components/related-posts'
 import { SolarPowerCTA, ctaVariantFor } from '@/components/solarpower-cta'
 import { ReadingProgress } from '@/components/reading-progress'
@@ -104,6 +104,16 @@ export default async function PostPage({ params }: PostPageProps) {
   const latest = noticias.filter((n) => n.slug !== post.slug && !relatedSlugs.has(n.slug)).slice(0, 5)
   const postUrl = `${siteConfig.url}/post/${post.slug}`
   const headings = extractHeadings(post.contenido || '')
+  const faq = extractFaq(post.contenido || '')
+  const faqSchema = faq.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  } : null
   const published = post.fecha_publicacion || post.created_at
   const isNoticia = post.source === 'noticia'
 
@@ -152,6 +162,12 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ReadingProgress targetId="article-body" />
       <Navbar />
 

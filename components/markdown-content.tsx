@@ -18,7 +18,7 @@ export interface TocItem {
 
 // Extract headings from markdown for TOC
 export function extractHeadings(markdown: string): TocItem[] {
-  const headingRegex = /^(#{2,3})\s+(.+)$/gm
+  const headingRegex = /^(#{2})\s+(.+)$/gm
   const headings: TocItem[] = []
   let match
 
@@ -29,6 +29,25 @@ export function extractHeadings(markdown: string): TocItem[] {
   }
 
   return headings
+}
+
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
+// Extrae preguntas frecuentes de una sección "## Preguntas frecuentes" con "### ¿Pregunta?" + respuesta
+export function extractFaq(markdown: string): FaqItem[] {
+  const match = /^##\s+Preguntas frecuentes[^\n]*\n([\s\S]*?)(?=^##\s|(?![\s\S]))/m.exec(markdown)
+  if (!match) return []
+  const items: FaqItem[] = []
+  const re = /^###\s+(.+)\n+([\s\S]*?)(?=^###\s|(?![\s\S]))/gm
+  let m
+  while ((m = re.exec(match[1])) !== null) {
+    const answer = stripMarkdownToText(m[2]).trim()
+    if (answer) items.push({ question: stripMarkdownToText(m[1]).trim(), answer })
+  }
+  return items
 }
 
 // Process markdown to HTML

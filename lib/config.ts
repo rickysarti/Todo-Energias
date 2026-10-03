@@ -20,6 +20,7 @@ export const siteConfig = {
 
 // Secciones principales del portal (navegación y home)
 export const sections = [
+  { label: 'Industria', href: '/industria' },
   { label: 'Actualidad', href: '/actualidad' },
   { label: 'Petróleo y Gas', href: '/categoria/petroleo-y-gas' },
   { label: 'Renovables', href: '/categoria/renovables' },

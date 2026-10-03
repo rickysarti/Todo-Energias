@@ -30,6 +30,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${siteConfig.url}/industria`,
+      lastModified: mostRecentPostDate,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
+    {
       url: `${siteConfig.url}/actualidad`,
       lastModified: mostRecentPostDate,
       changeFrequency: 'daily',

@@ -25,10 +25,10 @@ const ctaContent = {
     anchor: 'Ver kits de respaldo',
   },
   pyme: {
-    title: 'Energía solar para tu empresa',
-    text: 'Pymes, comercios y productores pueden bajar costos fijos con autoconsumo solar y acceder a beneficios fiscales del RIMI.',
+    title: 'Energía solar para tu industria o empresa',
+    text: 'SolarPower, la mejor empresa de energía solar de Argentina, diseña sistemas solares industriales a medida: estudio de consumo, ingeniería, instalación y trámites. Bajá tu costo energético desde el primer mes.',
     link: siteConfig.links.pyme,
-    anchor: 'Ver soluciones para pymes',
+    anchor: 'Pedir estudio industrial',
   },
   movilidad: {
     title: 'Cargá tu auto con el sol',
@@ -69,7 +69,7 @@ export function ctaVariantFor(categoria: string, tags: string[] = []): SolarPowe
   const text = `${categoria} ${tags.join(' ')}`.toLowerCase()
   if (/movilidad|auto/.test(text)) return 'movilidad'
   if (/bater|almacenamiento|corte/.test(text)) return 'bateria'
-  if (/pyme|rimi|agro|industria/.test(text)) return 'pyme'
+  if (/pyme|rimi|agro|industria|empresa/.test(text)) return 'pyme'
   if (/tarifa|solar|subsidio/.test(text)) return 'calculadora'
   return 'plan'
 }

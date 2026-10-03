@@ -11,6 +11,7 @@ export const revalidate = 300 // Revalidate every 5 minutes
 
 // Bloques temáticos de la portada (por slug de categoría)
 const categoryBlocks = [
+  { title: 'Industria y empresas', slugs: ['industria'], href: '/industria' },
   { title: 'Petróleo y Gas', slugs: ['petroleo-y-gas', 'mercados', 'economia'], href: '/categoria/petroleo-y-gas' },
   { title: 'Renovables y Energía Solar', slugs: ['renovables', 'energia-solar', 'region'], href: '/categoria/renovables' },
   { title: 'Almacenamiento y Tecnología', slugs: ['almacenamiento', 'tecnologia', 'nuclear'], href: '/categoria/almacenamiento' },
