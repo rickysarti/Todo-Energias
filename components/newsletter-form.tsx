@@ -44,7 +44,7 @@ export function NewsletterForm() {
     <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center gap-2 mb-2">
         <Mail className="h-5 w-5 text-accent" />
-        <h3 className="font-serif text-lg font-semibold text-foreground">El resumen energético</h3>
+        <h3 className="font-display text-lg font-bold text-foreground">El resumen energético</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-4">
         Una vez por semana, las noticias de energía que importan en Argentina y el mundo. Gratis.

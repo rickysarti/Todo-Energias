@@ -47,19 +47,19 @@ export default async function HomePage() {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
       <main className="flex-1">
-        <h1 className="sr-only">TodoEnergias: noticias de energía en Argentina</h1>
+        <h1 className="sr-only">TodoEnergías: noticias de energía en Argentina</h1>
         <div className="container mx-auto px-4 py-8 sm:py-10">
           {/* Portada */}
           {lead && (
             <section className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] animate-[rise-in_600ms_ease-out_both]">
               <PostCard post={lead} variant="lead" priority />
               <div>
-                <div className="mb-4 flex items-center gap-2 border-t-[3px] border-foreground pt-3">
+                <div className="mb-4 flex items-center gap-2 section-rule pt-4">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-60" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-destructive" />
                   </span>
-                  <h2 className="font-serif text-xl font-semibold text-foreground">Lo último</h2>
+                  <h2 className="font-display text-xl font-bold text-foreground">Lo último</h2>
                 </div>
                 <div className="space-y-5">
                   {latest.map((post) => (
@@ -99,7 +99,7 @@ export default async function HomePage() {
 
               {noticias.length === 0 && guias.length === 0 && (
                 <div className="text-center py-16">
-                  <h2 className="font-serif text-2xl font-semibold text-foreground mb-4">Próximamente</h2>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Próximamente</h2>
                   <p className="text-muted-foreground">
                     Estamos preparando contenido de calidad sobre energía en Argentina.
                   </p>

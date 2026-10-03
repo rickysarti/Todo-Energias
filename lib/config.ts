@@ -1,6 +1,7 @@
 export const siteConfig = {
-  name: 'TodoEnergias',
-  description: 'Noticias y analisis de energia en Argentina',
+  name: 'TodoEnergías',
+  tagline: 'Energía, en claro',
+  description: 'Noticias, datos y guías de energía para la Argentina',
   url: 'https://todoenergias.com.ar',
   ogImage: '/og-image.png',
   links: {

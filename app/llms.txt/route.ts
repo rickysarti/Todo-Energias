@@ -58,9 +58,9 @@ ${latestPosts.map(post => `### ${post.titulo}
 5. **Eficiencia Energetica**: Ahorro energetico, consejos, tecnologias
 6. **Mercado Energetico**: Noticias del sector, politicas, inversiones
 
-## Sobre TodoEnergias
+## Sobre TodoEnergías
 
-TodoEnergias es un portal de noticias especializado en el sector energetico argentino. Nuestro objetivo es informar sobre las ultimas novedades en energias renovables, tarifas electricas y todo lo relacionado con la transicion energetica en Argentina.
+TodoEnergías es un portal de noticias especializado en el sector energetico argentino. Nuestro objetivo es informar sobre las ultimas novedades en energias renovables, tarifas electricas y todo lo relacionado con la transicion energetica en Argentina.
 
 ## Contacto
 

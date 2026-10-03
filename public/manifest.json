@@ -1,20 +1,29 @@
 {
-  "name": "TodoEnergias - Noticias de Energia Argentina",
-  "short_name": "TodoEnergias",
-  "description": "Portal de noticias y analisis sobre energia en Argentina. Energia solar, eolica, tarifas electricas y mas.",
+  "name": "TodoEnergías — Energía, en claro",
+  "short_name": "TodoEnergías",
+  "description": "Noticias, datos y guías de energía para la Argentina. Industria, tarifas, renovables, petróleo y gas.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#ffffff",
-  "theme_color": "#10b981",
+  "background_color": "#FAF9F5",
+  "theme_color": "#333C47",
   "lang": "es-AR",
-  "categories": ["news", "education"],
+  "categories": [
+    "news",
+    "education"
+  ],
   "icons": [
     {
       "src": "/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     },
     {
       "src": "/icon-32x32.png",

@@ -42,7 +42,7 @@ ${post.contenido || ''}
 
 ## Sobre el Autor
 
-**${post.autor}** es colaborador de TodoEnergias, portal de noticias sobre energia en Argentina.
+**${post.autor}** es colaborador de TodoEnergías, portal de noticias sobre energia en Argentina.
 
 Ver mas articulos de ${post.autor}: ${siteConfig.url}/autores/${slugify(post.autor)}
 
@@ -52,7 +52,7 @@ Visite ${siteConfig.url}/noticias para mas articulos sobre ${post.categoria || '
 
 ---
 
-*Fuente: [TodoEnergias](${siteConfig.url}) - Portal de noticias de energia en Argentina*
+*Fuente: [TodoEnergías](${siteConfig.url}) - Portal de noticias de energia en Argentina*
 `
 
   return new Response(markdownContent, {

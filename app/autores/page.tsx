@@ -11,13 +11,13 @@ export const revalidate = 300
 
 export const metadata: Metadata = {
   title: 'Autores',
-  description: 'Conoce a los autores y periodistas que escriben en TodoEnergias sobre energia en Argentina.',
+  description: 'Conoce a los autores y periodistas que escriben en TodoEnergías sobre energia en Argentina.',
   openGraph: {
-    title: 'Autores | TodoEnergias',
-    description: 'Conoce a los autores de TodoEnergias.',
+    title: 'Autores | TodoEnergías',
+    description: 'Conoce a los autores de TodoEnergías.',
     type: 'website',
     url: `${siteConfig.url}/autores`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: {
     canonical: `${siteConfig.url}/autores`,

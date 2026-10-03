@@ -64,7 +64,7 @@ export function ArticleListing({
             {kicker && (
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent-foreground/80 dark:text-accent">{kicker}</p>
             )}
-            <h1 className="mt-1 font-serif text-4xl md:text-5xl font-semibold tracking-tight text-foreground">{title}</h1>
+            <h1 className="mt-1 font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground">{title}</h1>
             <p className="mt-3 max-w-2xl text-lg text-muted-foreground">{description}</p>
             <p className="mt-3 text-sm text-muted-foreground tabular-nums">
               {pagination.total} {pagination.total === 1 ? 'artículo' : 'artículos'}

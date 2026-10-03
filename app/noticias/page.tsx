@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Noticias de energía en Argentina',
   description: 'Todas las noticias, análisis y guías sobre energía en Argentina: petróleo y gas, renovables, energía solar, tarifas, almacenamiento y movilidad eléctrica.',
   openGraph: {
-    title: 'Noticias de energía en Argentina | TodoEnergias',
+    title: 'Noticias de energía en Argentina | TodoEnergías',
     description: 'Todas las noticias y análisis del sector energético.',
     type: 'website',
     url: `${siteConfig.url}/noticias`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: {
     canonical: `${siteConfig.url}/noticias`,

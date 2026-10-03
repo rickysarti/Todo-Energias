@@ -13,9 +13,9 @@ export async function Sidebar({ excludeSlug }: { excludeSlug?: string } = {}) {
     <aside className="space-y-8">
       {/* Más leídas */}
       <section>
-        <div className="mb-5 flex items-center gap-2 border-t-[3px] border-foreground pt-3">
+        <div className="mb-5 flex items-center gap-2 section-rule pt-4">
           <TrendingUp className="h-5 w-5 text-accent" />
-          <h2 className="font-serif text-xl font-semibold text-foreground">Lo más importante</h2>
+          <h2 className="font-display text-xl font-bold text-foreground">Lo más importante</h2>
         </div>
         <ol className="space-y-5">
           {trendingPosts.map((post, i) => (
@@ -34,7 +34,7 @@ export async function Sidebar({ excludeSlug }: { excludeSlug?: string } = {}) {
         className="group block rounded-xl border border-accent/50 bg-gradient-to-br from-accent/25 via-accent/10 to-transparent p-5 transition-colors hover:border-accent"
       >
         <Sun className="h-7 w-7 text-accent" />
-        <p className="mt-3 font-serif text-lg font-semibold leading-snug text-foreground">
+        <p className="mt-3 font-display text-lg font-bold leading-snug text-foreground">
           ¿Y si la próxima suba de luz no te afectara?
         </p>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -50,7 +50,7 @@ export async function Sidebar({ excludeSlug }: { excludeSlug?: string } = {}) {
       {/* Secciones */}
       {categories.length > 0 && (
         <section>
-          <h2 className="mb-4 border-t-[3px] border-foreground pt-3 font-serif text-xl font-semibold text-foreground">Secciones</h2>
+          <h2 className="mb-4 section-rule pt-4 font-display text-xl font-bold text-foreground">Secciones</h2>
           <ul className="flex flex-wrap gap-2">
             {categories.slice(0, 16).map((c) => (
               <li key={c.slug}>

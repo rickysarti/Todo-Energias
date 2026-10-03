@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from 'next'
-import { Inter, Fraunces } from 'next/font/google'
+import { Inter, Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { siteConfig } from '@/lib/config'
 import './globals.css'
@@ -11,24 +11,24 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const fraunces = Fraunces({
+const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-serif-display',
-  axes: ['opsz'],
+  variable: '--font-montserrat',
+  weight: ['500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'TodoEnergias | Noticias y analisis de energia en Argentina',
-    template: '%s | TodoEnergias',
+    default: 'TodoEnergías | Energía, en claro: noticias, datos y guías de energía en Argentina',
+    template: '%s | TodoEnergías',
   },
   description: 'Portal de noticias y analisis sobre energia en Argentina. Informacion actualizada sobre energia solar, eolica, tarifas electricas, eficiencia energetica y mas.',
   keywords: ['energia', 'argentina', 'energia solar', 'energia eolica', 'tarifas electricas', 'eficiencia energetica', 'renovables', 'cortes de luz', 'baterias'],
-  authors: [{ name: 'TodoEnergias' }],
-  creator: 'TodoEnergias',
-  publisher: 'TodoEnergias',
+  authors: [{ name: 'TodoEnergías' }],
+  creator: 'TodoEnergías',
+  publisher: 'TodoEnergías',
   formatDetection: {
     email: false,
     address: false,
@@ -39,24 +39,24 @@ export const metadata: Metadata = {
     locale: 'es_AR',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: 'TodoEnergias | Noticias y analisis de energia en Argentina',
+    title: 'TodoEnergías | Energía, en claro',
     description: 'Portal de noticias y analisis sobre energia en Argentina. Informacion actualizada sobre energia solar, eolica, tarifas electricas y mas.',
     images: [
       {
-        url: '/logo.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'TodoEnergias',
+        alt: 'TodoEnergías — Energía, en claro',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TodoEnergias | Noticias y analisis de energia en Argentina',
+    title: 'TodoEnergías | Energía, en claro',
     description: 'Portal de noticias y analisis sobre energia en Argentina.',
     site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,
-    images: ['/logo.png'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -72,6 +72,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
       { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
@@ -92,8 +93,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f7f6f1' },
-    { media: '(prefers-color-scheme: dark)', color: '#101421' },
+    { media: '(prefers-color-scheme: light)', color: '#FAF9F5' },
+    { media: '(prefers-color-scheme: dark)', color: '#14181E' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -126,16 +127,22 @@ function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'NewsMediaOrganization',
     '@id': `${siteConfig.url}/#organization`,
-    name: siteConfig.name,
-    alternateName: 'Todo Energias',
+    name: 'TodoEnergías',
+    alternateName: ['Todo Energías', 'TodoEnergías'],
     url: siteConfig.url,
     logo: {
       '@type': 'ImageObject',
-      url: `${siteConfig.url}/logo.png`,
+      url: `${siteConfig.url}/favicon.png`,
       width: 512,
       height: 512,
     },
-    image: `${siteConfig.url}/logo.png`,
+    image: `${siteConfig.url}/og-image.png`,
+    slogan: 'Energía, en claro',
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'SolarPower',
+      url: siteConfig.links.solarpower,
+    },
     sameAs: [
       siteConfig.links.twitter,
       siteConfig.links.solarpower,
@@ -219,7 +226,7 @@ export default function RootLayout({
         {/* DNS Prefetch */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
-      <body className={`${inter.variable} ${fraunces.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>

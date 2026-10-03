@@ -31,11 +31,11 @@ export const metadata: Metadata = {
     'ampliar potencia eléctrica',
   ],
   openGraph: {
-    title: `${title} | TodoEnergias`,
+    title: `${title} | TodoEnergías`,
     description,
     type: 'website',
     url: `${siteConfig.url}/industria`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: { canonical: `${siteConfig.url}/industria` },
 }
@@ -143,7 +143,7 @@ export default async function IndustriaPage() {
                 <p className="inline-flex items-center gap-2 rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground dark:text-accent">
                   <Factory className="h-4 w-4" /> Para dueños de industrias y empresas
                 </p>
-                <h1 className="mt-4 font-serif text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold leading-[1.08] tracking-tight text-foreground text-balance">
+                <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-bold leading-[1.08] tracking-tight text-foreground text-balance">
                   Energía para industrias: cuánto consume, cuánto cuesta y cómo pagar menos
                 </h1>
                 <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
@@ -226,7 +226,7 @@ export default async function IndustriaPage() {
               <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-accent/40 blur-3xl" />
               <div className="relative max-w-3xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">SolarPower · Energía solar industrial</p>
-                <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-semibold leading-tight">
+                <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold leading-tight">
                   Convertí el techo de tu planta en tu propia central eléctrica
                 </h2>
                 <p className="mt-3 opacity-85">
@@ -250,7 +250,7 @@ export default async function IndustriaPage() {
               <div className="divide-y divide-border rounded-xl border border-border bg-card">
                 {faqs.map((f) => (
                   <details key={f.q} className="group p-5">
-                    <summary className="cursor-pointer list-none font-serif text-lg font-semibold text-foreground marker:hidden">
+                    <summary className="cursor-pointer list-none font-display text-lg font-bold text-foreground marker:hidden">
                       {f.q}
                     </summary>
                     <p className="mt-3 text-muted-foreground">{f.a}</p>

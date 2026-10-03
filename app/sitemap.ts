@@ -48,6 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${siteConfig.url}/marca`,
+      lastModified: new Date('2026-10-03'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
       url: `${siteConfig.url}/sobre`,
       lastModified: new Date('2025-01-01'),
       changeFrequency: 'monthly',

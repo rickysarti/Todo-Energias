@@ -80,7 +80,7 @@ export function IndustrialCalculator() {
             <Calculator className="h-5 w-5" />
             <p className="text-xs font-semibold uppercase tracking-[0.14em]">Calculadora industrial</p>
           </div>
-          <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-semibold text-foreground">
+          <h2 className="mt-2 font-display text-2xl sm:text-3xl font-bold text-foreground">
             ¿Cuánta energía va a consumir tu nueva línea o equipo?
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -110,27 +110,27 @@ export function IndustrialCalculator() {
           <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-5">
             <div>
               <dt className="text-xs opacity-75">Consumo mensual</dt>
-              <dd className="font-serif text-3xl font-semibold tabular-nums">{fmt(r.kwhMes)}<span className="ml-1 text-base">kWh</span></dd>
+              <dd className="font-display text-3xl font-bold tabular-nums">{fmt(r.kwhMes)}<span className="ml-1 text-base">kWh</span></dd>
             </div>
             <div>
               <dt className="text-xs opacity-75">Costo de energía / mes</dt>
-              <dd className="font-serif text-3xl font-semibold tabular-nums">${fmt(r.costoMes)}</dd>
+              <dd className="font-display text-3xl font-bold tabular-nums">${fmt(r.costoMes)}</dd>
             </div>
             <div>
               <dt className="text-xs opacity-75">Potencia solar necesaria</dt>
-              <dd className="font-serif text-3xl font-semibold tabular-nums">{fmt(r.kwp, 1)}<span className="ml-1 text-base">kWp</span></dd>
+              <dd className="font-display text-3xl font-bold tabular-nums">{fmt(r.kwp, 1)}<span className="ml-1 text-base">kWp</span></dd>
             </div>
             <div>
               <dt className="text-xs opacity-75">Paneles de {PANEL_W} W</dt>
-              <dd className="font-serif text-3xl font-semibold tabular-nums">{fmt(r.paneles)}</dd>
+              <dd className="font-display text-3xl font-bold tabular-nums">{fmt(r.paneles)}</dd>
             </div>
             <div>
               <dt className="text-xs opacity-75">Superficie aprox. de techo</dt>
-              <dd className="font-serif text-2xl font-semibold tabular-nums">{fmt(r.m2)} m²</dd>
+              <dd className="font-display text-2xl font-bold tabular-nums">{fmt(r.m2)} m²</dd>
             </div>
             <div>
               <dt className="text-xs opacity-75">Ahorro estimado / mes</dt>
-              <dd className="font-serif text-2xl font-semibold tabular-nums text-accent">${fmt(r.ahorroMes)}</dd>
+              <dd className="font-display text-2xl font-bold tabular-nums text-accent">${fmt(r.ahorroMes)}</dd>
             </div>
           </dl>
           <div className="mt-auto pt-6">

@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Actualidad energética',
   description: 'Las noticias de energía de la semana: Vaca Muerta, tarifas de luz y gas, renovables, baterías, litio, autos eléctricos y el mercado energético mundial.',
   openGraph: {
-    title: 'Actualidad energética | TodoEnergias',
+    title: 'Actualidad energética | TodoEnergías',
     description: 'Las noticias de energía de la semana en Argentina y el mundo.',
     type: 'website',
     url: `${siteConfig.url}/actualidad`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: {
     canonical: `${siteConfig.url}/actualidad`,

@@ -12,12 +12,12 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, href, linkLabel = 'Ver más', kicker, className }: SectionHeaderProps) {
   return (
-    <div className={cn('mb-6 flex items-end justify-between gap-4 border-t-[3px] border-foreground pt-3', className)}>
+    <div className={cn('mb-6 flex items-end justify-between gap-4 section-rule pt-4', className)}>
       <div>
         {kicker && (
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent-foreground/80 dark:text-accent">{kicker}</p>
         )}
-        <h2 className="font-serif text-2xl sm:text-[1.75rem] font-semibold tracking-tight text-foreground">{title}</h2>
+        <h2 className="font-display text-2xl sm:text-[1.75rem] font-bold tracking-tight text-foreground">{title}</h2>
       </div>
       {href && (
         <Link

@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
   return {
     title: authorName,
-    description: `Articulos escritos por ${authorName} en TodoEnergias. Noticias y analisis sobre energia en Argentina.`,
+    description: `Articulos escritos por ${authorName} en TodoEnergías. Noticias y analisis sobre energia en Argentina.`,
     openGraph: {
-      title: `${authorName} | TodoEnergias`,
-      description: `Articulos escritos por ${authorName} en TodoEnergias.`,
+      title: `${authorName} | TodoEnergías`,
+      description: `Articulos escritos por ${authorName} en TodoEnergías.`,
       type: 'profile',
       url: `${siteConfig.url}/autores/${slug}`,
-      images: [{ url: `${siteConfig.url}/logo.png` }],
+      images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
     },
     alternates: {
       canonical: `${siteConfig.url}/autores/${slug}`,

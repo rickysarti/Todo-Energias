@@ -19,14 +19,14 @@ export async function GET() {
       <description><![CDATA[${post.description}]]></description>
       <pubDate>${pubDate}</pubDate>
       <category><![CDATA[${post.categoria || 'General'}]]></category>
-      <author>${post.autor || 'TodoEnergias'}</author>
+      <author>${post.autor || 'TodoEnergías'}</author>
     </item>`
   }).join('')
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>TodoEnergias - Noticias de Energia en Argentina</title>
+    <title>TodoEnergías - Noticias de Energia en Argentina</title>
     <link>${siteConfig.url}</link>
     <description>Portal de noticias y analisis sobre energia en Argentina. Energia solar, eolica, tarifas, eficiencia energetica y mas.</description>
     <language>es-AR</language>
@@ -34,7 +34,7 @@ export async function GET() {
     <atom:link href="${siteConfig.url}/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>${siteConfig.url}/logo.png</url>
-      <title>TodoEnergias</title>
+      <title>TodoEnergías</title>
       <link>${siteConfig.url}</link>
     </image>
     ${rssItems}

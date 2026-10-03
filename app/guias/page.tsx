@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Guías de energía solar',
   description: 'Guías prácticas sobre paneles solares, baterías, ahorro energético y movilidad eléctrica en Argentina, elaboradas junto a SolarPower.',
   openGraph: {
-    title: 'Guías de energía solar | TodoEnergias',
+    title: 'Guías de energía solar | TodoEnergías',
     description: 'Guías prácticas sobre energía solar y ahorro energético en Argentina.',
     type: 'website',
     url: `${siteConfig.url}/guias`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: {
     canonical: `${siteConfig.url}/guias`,

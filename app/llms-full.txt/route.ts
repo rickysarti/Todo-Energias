@@ -23,7 +23,7 @@ export async function GET() {
 
 - **URL**: ${siteConfig.url}/post/${post.slug}
 - **Categoria**: ${post.categoria || 'General'}
-- **Autor**: ${post.autor || 'TodoEnergias'}
+- **Autor**: ${post.autor || 'TodoEnergías'}
 - **Fecha de Publicacion**: ${formatDate(post.fecha_publicacion || post.created_at)}
 - **Tiempo de Lectura**: ${post.readingTime} minutos
 

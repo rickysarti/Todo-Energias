@@ -9,13 +9,13 @@ import { siteConfig } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros',
-  description: 'TodoEnergias es un medio especializado en noticias y analisis del sector energetico argentino. Conoce nuestra mision y equipo.',
+  description: 'TodoEnergías es un medio especializado en noticias y analisis del sector energetico argentino. Conoce nuestra mision y equipo.',
   openGraph: {
-    title: 'Sobre Nosotros | TodoEnergias',
-    description: 'Conoce la mision y el equipo detras de TodoEnergias.',
+    title: 'Sobre Nosotros | TodoEnergías',
+    description: 'Conoce la mision y el equipo detras de TodoEnergías.',
     type: 'website',
     url: `${siteConfig.url}/sobre`,
-    images: [{ url: `${siteConfig.url}/logo.png` }],
+    images: [{ url: `${siteConfig.url}/og-image.png`, width: 1200, height: 630 }],
   },
   alternates: {
     canonical: `${siteConfig.url}/sobre`,
@@ -61,7 +61,7 @@ export default function SobrePage() {
           <header className="text-center max-w-3xl mx-auto mb-16">
             <Image
               src="/logo.png"
-              alt="TodoEnergias"
+              alt="TodoEnergías"
               width={200}
               height={45}
               className="mx-auto mb-6 h-12 w-auto"
@@ -70,7 +70,7 @@ export default function SobrePage() {
               Tu fuente de informacion sobre energia en Argentina
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              TodoEnergias es un medio digital especializado en cubrir todas las noticias, 
+              TodoEnergías es un medio digital especializado en cubrir todas las noticias, 
               analisis y tendencias del sector energetico argentino. Desde tarifas electricas 
               hasta energia solar, pasando por eficiencia energetica y nuevas tecnologias.
             </p>
@@ -105,7 +105,7 @@ export default function SobrePage() {
             </h2>
             <div className="prose text-foreground">
               <p className="text-muted-foreground leading-relaxed mb-4">
-                En TodoEnergias nos comprometemos a ofrecer informacion verificada, 
+                En TodoEnergías nos comprometemos a ofrecer informacion verificada, 
                 imparcial y actualizada sobre el sector energetico argentino. Nuestro 
                 equipo de periodistas y especialistas trabaja para traducir la 
                 complejidad tecnica del sector en contenido accesible para todos.

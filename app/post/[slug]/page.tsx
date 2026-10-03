@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   }
 
   const postUrl = `${siteConfig.url}/post/${post.slug}`
-  const ogImage = post.imagen_destacada_url || `${siteConfig.url}/logo.png`
+  const ogImage = post.imagen_destacada_url || `${siteConfig.url}/og-image.png`
 
   return {
     title: post.titulo,
@@ -124,7 +124,7 @@ export default async function PostPage({ params }: PostPageProps) {
     headline: post.titulo,
     alternativeHeadline: post.subtitulo || undefined,
     description: post.description,
-    image: [post.imagen_destacada_url || `${siteConfig.url}/logo.png`],
+    image: [post.imagen_destacada_url || `${siteConfig.url}/og-image.png`],
     author: {
       '@type': isNoticia ? 'Organization' : 'Person',
       name: post.autor,
@@ -135,7 +135,7 @@ export default async function PostPage({ params }: PostPageProps) {
       name: siteConfig.name,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.url}/logo.png`,
+        url: `${siteConfig.url}/favicon.png`,
         width: 512,
         height: 512,
       },
@@ -188,7 +188,7 @@ export default async function PostPage({ params }: PostPageProps) {
               <SourceBadge source={post.source} />
             </div>
 
-            <h1 className="font-serif text-[2rem] leading-[1.1] sm:text-5xl lg:text-[3.4rem] font-semibold tracking-tight text-foreground text-balance">
+            <h1 className="font-display text-[2rem] leading-[1.1] sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-foreground text-balance">
               {post.titulo}
             </h1>
 
@@ -295,7 +295,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 <TableOfContents items={headings} />
                 {latest.length > 0 && (
                   <section>
-                    <h2 className="mb-4 border-t-[3px] border-foreground pt-3 font-serif text-lg font-semibold">Últimas noticias</h2>
+                    <h2 className="mb-4 section-rule pt-4 font-display text-lg font-bold">Últimas noticias</h2>
                     <div className="space-y-4">
                       {latest.slice(0, 4).map((n) => (
                         <PostCard key={n.id} post={n} variant="compact" />

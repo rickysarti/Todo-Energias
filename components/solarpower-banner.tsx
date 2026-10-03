@@ -15,7 +15,7 @@ export function SolarPowerBanner() {
       <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-[1.1fr_1.4fr] lg:items-center">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Con el apoyo de SolarPower</p>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-semibold leading-tight text-balance">
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold leading-tight text-balance">
             ¿Cuánto podrías ahorrar generando tu propia energía?
           </h2>
           <p className="mt-3 max-w-md opacity-85">

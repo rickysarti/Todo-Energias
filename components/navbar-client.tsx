@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Menu, X, Search, Sun } from 'lucide-react'
@@ -40,8 +39,9 @@ export function NavbarClient() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+      <div className="brand-stripe-segmented h-1 w-full" aria-hidden />
       {/* Top strip */}
-      <div className="hidden md:block border-b border-border/60 bg-primary text-primary-foreground dark:bg-card dark:text-foreground">
+      <div className="hidden md:block border-b border-border/60 bg-[var(--brand-carbon)] text-white dark:bg-card dark:text-foreground">
         <div className="container mx-auto flex h-8 items-center justify-between px-4 text-xs">
           <span className="opacity-90 tabular-nums" suppressHydrationWarning>{today}</span>
           <div className="flex items-center gap-5 opacity-90">
@@ -62,15 +62,11 @@ export function NavbarClient() {
 
       <nav className="container mx-auto px-4" aria-label="Principal">
         <div className="flex h-16 md:h-[4.5rem] items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="TodoEnergias, inicio">
-            <Image
-              src="/logo.png"
-              alt="TodoEnergias"
-              width={200}
-              height={50}
-              className="max-h-10 md:max-h-12 w-auto object-contain dark:brightness-0 dark:invert"
-              priority
-            />
+          <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="TodoEnergías, inicio">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/todoenergias-logo-sin-tagline.svg" alt="TodoEnergías" width={220} height={22} className="h-6 md:h-8 w-auto dark:hidden" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/todoenergias-logo-sin-tagline-blanco.svg" alt="" aria-hidden width={220} height={22} className="hidden h-6 md:h-8 w-auto dark:block" />
           </Link>
 
           <div className="hidden md:flex items-center gap-2">

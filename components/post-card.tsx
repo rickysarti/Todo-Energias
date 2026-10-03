@@ -44,7 +44,7 @@ function Thumb({
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-primary/10 to-primary/30 flex items-center justify-center">
-          <span className={cn('font-serif font-bold text-primary/40', fallbackSize)}>TE</span>
+          <span className={cn('font-display font-bold text-primary/40', fallbackSize)}>TE</span>
         </div>
       )}
     </div>
@@ -67,7 +67,7 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
               <CategoryBadge category={post.categoria} linked={false} variant="overlay" />
               <SourceBadge source={post.source} className="border-white/40 bg-white/10 text-white" />
             </div>
-            <h2 className="font-serif text-2xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-[1.12] text-white text-balance group-hover:underline decoration-accent decoration-2 underline-offset-4">
+            <h2 className="font-display text-2xl sm:text-4xl lg:text-[2.6rem] font-bold leading-[1.12] text-white text-balance group-hover:underline decoration-accent decoration-2 underline-offset-4">
               {post.titulo}
             </h2>
             <p className="mt-3 hidden sm:block max-w-3xl text-base text-white/80 line-clamp-2">{post.description}</p>
@@ -92,7 +92,7 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
               <CategoryBadge category={post.categoria} size="md" linked={false} />
               <SourceBadge source={post.source} />
             </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-tight text-foreground group-hover:text-primary transition-colors text-balance">
+            <h2 className="font-display text-2xl md:text-3xl font-bold leading-tight text-foreground group-hover:text-primary transition-colors text-balance">
               {post.titulo}
             </h2>
             <p className="mt-3 text-muted-foreground line-clamp-3 leading-relaxed">{post.description}</p>
@@ -116,7 +116,7 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
         <div className="flex-1 min-w-0">
           <CategoryBadge category={post.categoria} className="mb-1" />
           <Link href={href}>
-            <h3 className="font-serif font-semibold text-foreground text-[1.02rem] leading-snug group-hover:text-primary transition-colors line-clamp-3">
+            <h3 className="font-display font-bold text-foreground text-[1.02rem] leading-snug group-hover:text-primary transition-colors line-clamp-3">
               {post.titulo}
             </h3>
           </Link>
@@ -131,11 +131,11 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
   if (variant === 'numbered') {
     return (
       <article className={cn('group flex gap-4', className)}>
-        <span className="font-serif text-3xl font-bold leading-none text-accent tabular-nums w-8 shrink-0">
+        <span className="font-display text-3xl font-bold leading-none text-accent tabular-nums w-8 shrink-0">
           {(index ?? 0) + 1}
         </span>
         <Link href={href} className="block min-w-0">
-          <h3 className="font-serif font-semibold text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-3">
+          <h3 className="font-display font-bold text-foreground leading-snug group-hover:text-primary transition-colors line-clamp-3">
             {post.titulo}
           </h3>
           <p className="mt-1 text-xs text-muted-foreground">
@@ -167,7 +167,7 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
           {formatRelative(time)}
         </time>
         <Link href={href} className="block">
-          <h3 className="mt-0.5 font-serif font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">
+          <h3 className="mt-0.5 font-display font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
             {post.titulo}
           </h3>
         </Link>
@@ -185,7 +185,7 @@ export function PostCard({ post, variant = 'default', priority = false, index, c
             <CategoryBadge category={post.categoria} linked={false} />
             <SourceBadge source={post.source} />
           </div>
-          <h3 className="font-serif text-lg font-semibold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3 text-balance">
+          <h3 className="font-display text-lg font-bold leading-snug text-foreground group-hover:text-primary transition-colors line-clamp-3 text-balance">
             {post.titulo}
           </h3>
           <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{post.description}</p>

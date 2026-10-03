@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     title: `${name}: noticias y análisis`,
     description: `Últimas noticias y análisis sobre ${name.toLowerCase()} en Argentina y el mundo. Información actualizada del sector energético.`,
     openGraph: {
-      title: `${name} | TodoEnergias`,
+      title: `${name} | TodoEnergías`,
       description: `Últimas noticias sobre ${name.toLowerCase()}`,
       type: 'website',
       url: `${siteConfig.url}/categoria/${slug}`,

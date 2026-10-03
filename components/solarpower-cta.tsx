@@ -48,7 +48,7 @@ export function SolarPowerCTA({ variant = 'calculadora' }: SolarPowerCTAProps) {
       </div>
       <div className="flex-1">
         <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">SolarPower</p>
-        <h3 className="font-serif text-xl font-semibold text-foreground">{content.title}</h3>
+        <h3 className="font-display text-xl font-bold text-foreground">{content.title}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{content.text}</p>
       </div>
       <a
