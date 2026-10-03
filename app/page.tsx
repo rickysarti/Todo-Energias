@@ -36,7 +36,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 py-10 sm:py-14">
           {/* Hero Section */}
           {heroPost && (
-            <section className="mb-12">
+            <section className="mb-14 animate-[rise-in_700ms_ease-out_both]">
               <PostCard post={heroPost} variant="hero" priority />
             </section>
           )}
@@ -46,8 +46,8 @@ export default async function HomePage() {
             <div className="lg:col-span-2 space-y-12">
               {/* Latest News */}
               {latestPosts.length > 0 && (
-                <section>
-                  <div className="flex items-center justify-between mb-6">
+                <section className="animate-[rise-in_700ms_150ms_ease-out_both]">
+                  <div className="mb-6 flex items-end justify-between border-b border-border/80 pb-4">
                     <h2 className="text-2xl font-bold text-foreground">Ultimas Noticias</h2>
                     <Link
                       href="/noticias"
@@ -67,8 +67,8 @@ export default async function HomePage() {
 
               {/* Category Sections */}
               {topCategories.map(([category, posts]) => (
-                <section key={category}>
-                  <div className="flex items-center justify-between mb-6">
+                <section key={category} className="animate-[rise-in_700ms_300ms_ease-out_both]">
+                  <div className="mb-6 flex items-end justify-between border-b border-border/80 pb-4">
                     <h2 className="text-2xl font-bold text-foreground">{category}</h2>
                     <Link
                       href={`/categoria/${slugify(category)}`}
