@@ -48,13 +48,13 @@ export function NavbarClient() {
             <Link href="/sobre" className="hover:opacity-100 hover:underline underline-offset-2">Quiénes somos</Link>
             <Link href="/rss.xml" className="hover:opacity-100 hover:underline underline-offset-2">RSS</Link>
             <a
-              href={siteConfig.links.calculadora}
+              href={siteConfig.links.solarpower}
               target="_blank"
               rel="noopener"
               className="inline-flex items-center gap-1 font-semibold text-accent hover:underline underline-offset-2"
             >
               <Sun className="h-3.5 w-3.5" />
-              Calculá tu ahorro solar
+              Pasate a la energía solar con SolarPower
             </a>
           </div>
         </div>
@@ -161,13 +161,13 @@ export function NavbarClient() {
               </li>
             </ul>
             <a
-              href={siteConfig.links.calculadora}
+              href={siteConfig.links.solarpower}
               target="_blank"
               rel="noopener"
               className="mt-3 flex items-center justify-center gap-2 rounded-lg bg-accent px-3 py-2.5 font-semibold text-accent-foreground"
             >
               <Sun className="h-4 w-4" />
-              Calculá tu ahorro solar
+              Pasate a la energía solar con SolarPower
             </a>
           </div>
         )}
