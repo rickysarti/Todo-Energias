@@ -17,7 +17,7 @@ import { PostCard } from '@/components/post-card'
 import {
   getPostBySlug,
   getRelatedPosts,
-  getNoticias,
+  getLatestNoticiasForArticle,
   formatDate,
   formatDateISO,
   slugify,
@@ -98,7 +98,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const [related, noticias] = await Promise.all([
     getRelatedPosts(post.slug, post.categoria, 4, post.tags),
-    getNoticias(),
+    getLatestNoticiasForArticle(),
   ])
   const relatedSlugs = new Set(related.map((p) => p.slug))
   const latest = noticias.filter((n) => n.slug !== post.slug && !relatedSlugs.has(n.slug)).slice(0, 5)

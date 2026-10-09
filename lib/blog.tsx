@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 import { createPublicClient } from '@/lib/supabase/public'
 import { siteConfig } from '@/lib/config'
 import type {
@@ -211,7 +212,8 @@ export function paginate<T>(
   }
 }
 
-// --- Fuentes de datos (cacheadas por request) ---
+// Los listados completos se comparten dentro de la visita. Son demasiado grandes
+// para la caché persistente de Next; las consultas acotadas de artículos van debajo.
 
 export const getBlogPosts = cache(async (): Promise<PostWithReadingTime[]> => {
   const supabase = createPublicClient()
@@ -254,26 +256,37 @@ export const getPublishedPosts = cache(async (): Promise<PostWithReadingTime[]> 
 })
 
 // Get single post by slug (las noticias tienen prioridad ante un slug repetido)
-export const getPostBySlug = cache(async (slug: string): Promise<PostWithReadingTime | null> => {
+const loadPostBySlug = unstable_cache(async (slug: string): Promise<PostWithReadingTime | null> => {
   const supabase = createPublicClient()
 
-  const { data: noticia } = await supabase
+  const { data: noticia, error: noticiaError } = await supabase
     .from(NOTICIAS_TABLE)
     .select('*')
     .eq('slug', slug)
     .eq('estado', 'publicado')
     .maybeSingle()
 
+  if (noticiaError) throw noticiaError
   if (noticia) return enrichPost(fromNoticia(noticia as NoticiaRow))
 
-  const { data: blog } = await supabase
+  const { data: blog, error: blogError } = await supabase
     .from(BLOG_TABLE)
     .select('*')
     .eq('slug', slug)
     .eq('estado', 'publicado')
     .maybeSingle()
 
+  if (blogError) throw blogError
   return blog ? enrichPost(fromBlog(blog as BlogPost)) : null
+}, ['todoenergias-post-by-slug'], { revalidate: 300 })
+
+export const getPostBySlug = cache(async (slug: string): Promise<PostWithReadingTime | null> => {
+  try {
+    return await loadPostBySlug(slug)
+  } catch (error) {
+    console.error('Error fetching post by slug:', error)
+    return null
+  }
 })
 
 // Get posts by category
@@ -340,16 +353,43 @@ export async function getUniqueAuthors(): Promise<string[]> {
   return [...seen.values()]
 }
 
-// Related posts: misma categoría primero, luego tags compartidos, luego lo más reciente del mismo tipo
-export async function getRelatedPosts(
+// El artículo solo necesita unas pocas sugerencias, no todos los cuerpos publicados.
+const loadRelatedPosts = unstable_cache(async (
   currentSlug: string,
   categoria: string,
-  limit: number = 4,
-  tags: string[] = []
-): Promise<PostWithReadingTime[]> {
-  const posts = (await getPublishedPosts()).filter((p) => p.slug !== currentSlug)
+  limit: number,
+  tags: string[]
+): Promise<PostWithReadingTime[]> => {
+  const supabase = createPublicClient()
+  const [newsByCategory, blogByCategory, newsByTag] = await Promise.all([
+    supabase.from(NOTICIAS_TABLE).select('*').eq('estado', 'publicado')
+      .lte('fecha_publicacion', new Date().toISOString()).ilike('categoria', categoria)
+      .order('fecha_publicacion', { ascending: false }).limit(16),
+    supabase.from(BLOG_TABLE).select('*').eq('estado', 'publicado')
+      .ilike('categoria', categoria).order('fecha_publicacion', { ascending: false }).limit(16),
+    tags.length
+      ? supabase.from(NOTICIAS_TABLE).select('*').eq('estado', 'publicado')
+          .lte('fecha_publicacion', new Date().toISOString()).overlaps('tags', tags)
+          .order('fecha_publicacion', { ascending: false }).limit(16)
+      : Promise.resolve({ data: [], error: null }),
+  ])
+
+  if (newsByCategory.error || blogByCategory.error || newsByTag.error) {
+    throw newsByCategory.error || blogByCategory.error || newsByTag.error
+  }
+
+  const postsBySlug = new Map<string, PostWithReadingTime>()
+  for (const row of [...(newsByCategory.data ?? []), ...(newsByTag.data ?? [])]) {
+    const post = enrichPost(fromNoticia(row as NoticiaRow))
+    if (post.slug !== currentSlug) postsBySlug.set(post.slug, post)
+  }
+  for (const row of blogByCategory.data ?? []) {
+    const post = enrichPost(fromBlog(row as BlogPost))
+    if (post.slug !== currentSlug && !postsBySlug.has(post.slug)) postsBySlug.set(post.slug, post)
+  }
+
   const cat = slugify(categoria || '')
-  const scored = posts.map((p) => {
+  const scored = [...postsBySlug.values()].map((p) => {
     let score = 0
     if (slugify(p.categoria) === cat) score += 3
     score += p.tags.filter((t) => tags.includes(t)).length * 2
@@ -360,6 +400,38 @@ export async function getRelatedPosts(
     .sort((a, b) => b.score - a.score || postDate(b.p) - postDate(a.p))
     .map((s) => s.p)
     .slice(0, limit)
+}, ['todoenergias-related-posts'], { revalidate: 300 })
+
+export async function getRelatedPosts(
+  currentSlug: string,
+  categoria: string,
+  limit = 4,
+  tags: string[] = [],
+): Promise<PostWithReadingTime[]> {
+  try {
+    return await loadRelatedPosts(currentSlug, categoria, limit, tags)
+  } catch (error) {
+    console.error('Error fetching related posts:', error)
+    return []
+  }
+}
+
+const loadLatestNoticiasForArticle = unstable_cache(async (): Promise<PostWithReadingTime[]> => {
+  const supabase = createPublicClient()
+  const { data, error } = await supabase.from(NOTICIAS_TABLE).select('*')
+    .eq('estado', 'publicado').lte('fecha_publicacion', new Date().toISOString())
+    .order('fecha_publicacion', { ascending: false }).limit(10)
+  if (error) throw error
+  return (data ?? []).map((row) => enrichPost(fromNoticia(row as NoticiaRow)))
+}, ['todoenergias-latest-news-for-article'], { revalidate: 300 })
+
+export async function getLatestNoticiasForArticle(): Promise<PostWithReadingTime[]> {
+  try {
+    return await loadLatestNoticiasForArticle()
+  } catch (error) {
+    console.error('Error fetching latest news for article:', error)
+    return []
+  }
 }
 
 // Trending: noticias de los últimos 14 días (si no hay, lo más reciente)
